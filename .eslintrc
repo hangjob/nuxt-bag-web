@@ -1,0 +1,9 @@
+{
+    "root": true,
+    "rules": {
+        "indent": [1, 4]
+    },
+    "extends": [
+        "@nuxt/eslint-config"
+    ]
+}

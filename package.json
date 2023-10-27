@@ -1,0 +1,57 @@
+{
+    "name": "nuxt-bag-web",
+    "version": "1.0.0",
+    "description": "nuxt-bag-web application and vue-bag-admin egg-bag-framework",
+    "repository": "your-org/my-module",
+    "license": "MIT",
+    "type": "module",
+    "exports": {
+        ".": {
+            "types": "./dist/types.d.ts",
+            "import": "./dist/module.mjs",
+            "require": "./dist/module.cjs"
+        }
+    },
+    "main": "./dist/module.cjs",
+    "types": "./dist/types.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "prepack": "nuxt-module-build build",
+        "dev": "nuxi dev playground",
+        "dev:build": "nuxi build playground",
+        "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
+        "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
+        "lint": "eslint .",
+        "test": "vitest run",
+        "test:watch": "vitest watch"
+    },
+    "dependencies": {
+        "@css-render/vue3-ssr": "^0.15.12",
+        "@nuxt/content": "^2.8.5",
+        "@nuxt/image": "^1.0.0",
+        "@nuxt/kit": "^3.8.0",
+        "@nuxt/ui": "^2.9.0",
+        "@nuxtjs/markdownit": "^2.0.0",
+        "@pinia/nuxt": "^0.5.1",
+        "naive-ui": "^2.35.0",
+        "pinia": "^2.1.7"
+    },
+    "devDependencies": {
+        "@nuxt/devtools": "latest",
+        "@nuxt/eslint-config": "^0.2.0",
+        "@nuxt/module-builder": "^0.5.2",
+        "@nuxt/schema": "^3.8.0",
+        "@nuxt/test-utils": "^3.8.0",
+        "@types/node": "^18.18.6",
+        "changelogen": "^0.5.5",
+        "dayjs-nuxt": "^2.1.9",
+        "eslint": "^8.52.0",
+        "less": "^4.2.0",
+        "nuxt": "^3.8.0",
+        "nuxt-simple-sitemap": "^3.4.1",
+        "vitest": "^0.33.0",
+        "vue-i18n": "^9.5.0"
+    }
+}
