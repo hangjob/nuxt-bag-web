@@ -6,11 +6,12 @@ import {
     installModule,
     addPlugin,
     addLayout,
-    extendPages
+    extendPages,
+    extendRouteRules
 } from '@nuxt/kit'
 import setupComponents from "./runtime/components";
 import setupLayout from "./runtime/layout";
-import setupPages from "./runtime/pages"
+import {defu} from 'defu'
 
 // Module options TypeScript interface definition
 export interface ModuleOptions {
@@ -21,7 +22,8 @@ export interface ModuleOptions {
     pinia: Array<any>,
     i18n: {
         messages: {}
-    }
+    },
+    seoMeta: any
 }
 
 
@@ -38,30 +40,33 @@ export default defineNuxtModule<ModuleOptions>({
         pinia: [],
         i18n: {
             messages: {}
+        },
+        seoMeta: {
+            title: 'bag',
+            ogTitle: '',
+            description: '',
+            ogDescription: '',
+            ogImage: 'https://example.com/image.png',
+            twitterCard: 'bag-image',
         }
     },
     async setup(options, nuxt) {
         const resolver = createResolver(import.meta.url)
         console.log('配置参数', options.name)
 
+        // 合并配置
+        nuxt.options.runtimeConfig.public = defu(nuxt.options.runtimeConfig.public, options)
+
         // 添加全局变量
         const components = setupComponents()
         components.forEach((component) => {
-            addComponent(component).then()
+            // addComponent(component).then()
         })
 
         // 添加布局
         const layouts = setupLayout()
         layouts.forEach((item) => {
             addLayout(item.src, item.name)
-        })
-
-        // 添加页面
-        const pages = setupPages()
-        pages.forEach((item) => {
-            extendPages((pages) => {
-                pages.unshift(item)
-            })
         })
 
         // 添加复合函数
@@ -79,7 +84,7 @@ export default defineNuxtModule<ModuleOptions>({
 
         // 添加状态管理
         await installModule('@pinia/nuxt', {
-            storesDirs: [resolver.resolve('runtime/stores/**')],
+            storesDirs: [resolver.resolve('runtime/stores/**'), ...options.pinia],
             autoImports: ['defineStore', 'acceptHMRUpdate'],
         })
 
@@ -97,14 +102,13 @@ export default defineNuxtModule<ModuleOptions>({
             format: ['webp', 'avif', 'jpeg', 'jpg', 'png', 'gif'],
         })
 
-        // 注入静态资源
-        nuxt.options.css.push(resolver.resolve('./runtime/assets/styles.less'))
+        // https://www.tailwindcss.cn/docs/object-fit
+        await installModule('@nuxtjs/tailwindcss')
 
-        // 解析.md文件
-        // await installModule("@nuxt/content")
+        // 注入静态资源
+        nuxt.options.css.push(resolver.resolve('./runtime/assets/reset.less'))
 
         // 多语言插件
         await addPlugin(resolver.resolve('runtime/plugins/i18n'))
-        await addPlugin(resolver.resolve('runtime/plugins/headers'))
     }
 })

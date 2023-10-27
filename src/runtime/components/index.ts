@@ -4,11 +4,18 @@ const setupComponents = ()=>{
     return [
         {
             name: 'AppHeader',
-            filePath: resolver.resolve('./AppHeader.vue')
+            filePath: resolver.resolve('./AppHeader.vue'),
+            global:true
         },
         {
             name: 'AppFooter',
-            filePath: resolver.resolve('./AppFooter.vue')
+            filePath: resolver.resolve('./AppFooter.vue'),
+            global:true
+        },
+        {
+            name: 'AppArticleCard',
+            filePath: resolver.resolve('./AppArticleCard.vue'),
+            global:true
         }
     ]
 }
