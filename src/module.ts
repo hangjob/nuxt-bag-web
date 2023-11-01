@@ -9,8 +9,6 @@ import {
     extendPages,
     extendRouteRules
 } from '@nuxt/kit'
-import setupComponents from "./runtime/components";
-import setupLayout from "./runtime/layout";
 import {defu} from 'defu'
 
 // Module options TypeScript interface definition
@@ -57,17 +55,6 @@ export default defineNuxtModule<ModuleOptions>({
         // 合并配置
         nuxt.options.runtimeConfig.public = defu(nuxt.options.runtimeConfig.public, options)
 
-        // 添加全局变量
-        const components = setupComponents()
-        components.forEach((component) => {
-            // addComponent(component).then()
-        })
-
-        // 添加布局
-        const layouts = setupLayout()
-        layouts.forEach((item) => {
-            addLayout(item.src, item.name)
-        })
 
         // 添加复合函数
         addImportsDir(resolver.resolve('runtime/composables'))
@@ -105,6 +92,12 @@ export default defineNuxtModule<ModuleOptions>({
         // https://www.tailwindcss.cn/docs/object-fit
         await installModule('@nuxtjs/tailwindcss')
 
+        nuxt.hook('components:dirs', async (dirs) => {
+            dirs.push({
+                path: resolver.resolve('runtime/components'),
+                prefix: 'bag'
+            })
+        })
         // 注入静态资源
         nuxt.options.css.push(resolver.resolve('./runtime/assets/reset.less'))
 
