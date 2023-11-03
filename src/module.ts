@@ -25,6 +25,7 @@ export interface ModuleOptions {
 }
 
 
+
 export default defineNuxtModule<ModuleOptions>({
     meta: {
         name: 'nuxt-bag-web',
@@ -90,14 +91,15 @@ export default defineNuxtModule<ModuleOptions>({
         })
 
         // https://www.tailwindcss.cn/docs/object-fit
-        await installModule('@nuxtjs/tailwindcss')
-
         nuxt.hook('components:dirs', async (dirs) => {
             dirs.push({
                 path: resolver.resolve('runtime/components'),
                 prefix: 'bag'
             })
         })
+
+        await installModule('@nuxtjs/tailwindcss')
+
         // 注入静态资源
         nuxt.options.css.push(resolver.resolve('./runtime/assets/reset.less'))
 

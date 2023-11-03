@@ -4,6 +4,7 @@
       <NuxtLayout>
           <NuxtPage/>
       </NuxtLayout>
+      <bag-app-footer></bag-app-footer>
   </div>
 </template>
 
