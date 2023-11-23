@@ -60,6 +60,7 @@ export default defineNuxtModule<ModuleOptions>({
         // 添加复合函数
         addImportsDir(resolver.resolve('runtime/composables'))
 
+
         // 添加时间处理插件
         await installModule("dayjs-nuxt", {
             locales: ['en', 'zh-cn'],
