@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <UApp>
         <NuxtLayout name="desktop-base">
             <NuxtPage />
         </NuxtLayout>
-    </div>
+    </UApp>
 </template>
 <script setup>
 const title = "ssss"

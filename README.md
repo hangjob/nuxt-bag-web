@@ -1,75 +1,62 @@
-# Nuxt Minimal Starter
+### nuxt-bag-web 构建一个响应式的SSR服务端渲染，采用Nuxt3、Naive UI、JavaScript、Pinia等前沿最新的技术栈开发，提供最基础的功能
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+### tailwindcss
 
-## Setup
+`"@nuxt/ui`已安装tailwindcss，如果需要自定义tailwindcss，请删除`@nuxt/ui`，并自行安装tailwindcss
 
-Make sure to install dependencies:
-
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+```vue
+// nuxt/ui 使用
+<UApp>
+<NuxtPage/>
+</UApp>
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+### 请求水和问题
+```typescript
+// 方式一
+const { data: apiData } = useFetch("/api/pm-cities");
+const items = computed(() => apiData.value?.data || []);
 ```
 
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+```typescript
+// 方式二
+const {data: items, refresh} = useAsyncData('pm-cities',
+    async () => {
+        const {data} = await useFetch("/api/pm-cities", {method: "POST"});
+        return data.value?.data || []; // 确保返回数组
+    },
+    {
+        transform: (res) => res || []
+    }
+);
 ```
 
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+### 动画
+过度动画库，会让页面元素有一个平滑的过渡效果，而不是直接出现或消失`@formkit/auto-animate/nuxt`
+```vue
+<template>
+    <div>
+        <h5>Click emojis to remove them.</h5>
+        <ul v-auto-animate>
+            <li
+                v-for="item in items"
+                :key="item"
+                @click="removeItem(item)"
+            >
+                {{ item }}
+            </li>
+        </ul>
+    </div>
+</template>
+<script setup>
+const items = ref(["😏","😐","😑","😒","😕"])
+function removeItem(toRemove) {
+    items.value = items.value.filter((item) => item !== toRemove)
+}
+</script>
 ```
+### 状态管理
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+### 图标合集
+[https://icones.js.org/](https://icones.js.org/)

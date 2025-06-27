@@ -1,20 +1,25 @@
 <template>
-    <div>
+    <div class="px-5 text-[22px] bg-gray-100">
         主页
-        <button @click="handleClick">测试</button>
+        <UButton>Button{{ website.description }}</UButton>
+        <button class="px-5" @click="handleClick">测试</button>
+        <!--        <img src="~/assets/image/1.jpg" alt="">-->
         <p v-for="item in items" :key="item.documentId">{{ item.name }}</p>
     </div>
 </template>
 <script setup>
-// import {useApi} from "~/composables/useApi.js";
-
-// const { data: apiData } = useFetch("/api/pm-cities");
-// const items = computed(() => apiData.value?.data || []);
+import {useWebsiteStore} from "~/stores/website.js";
+const website = useWebsiteStore()
 
 
 const {data: items, refresh} = useAsyncData('pm-cities',
     async () => {
-        const {data} = await useFetch("/api/pm-cities");
+        const {data} = await useFetch(`/api/admin/login-admin?a=${website.description}`, {
+            method: "POST",
+            headers: {
+                abc: "88888" // 👈 客户端添加请求头
+            }
+        });
         return data.value?.data || []; // 确保返回数组
     },
     {
@@ -23,7 +28,13 @@ const {data: items, refresh} = useAsyncData('pm-cities',
 );
 
 const handleClick = () => {
-    $fetch("/api/pm-classifies").then(res => {
+    website.description = '2222'
+    $fetch(`/api/admin/login-admin?a=${website.description}`, {
+        method: "POST",
+        headers: {
+            abc: "6666" // 👈 客户端添加请求头
+        }
+    }).then(res => {
         console.log(res)
         items.value = res.data;
     })
