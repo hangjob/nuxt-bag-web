@@ -2,6 +2,10 @@
 export default defineNuxtConfig({
     compatibilityDate: '2025-05-15',
     devtools: {enabled: true},
+    css: [
+        '~/assets/css/main.css',
+        '~/assets/css/style.css'
+    ],
     modules: [
         '@nuxt/fonts',
         '@nuxt/icon',
@@ -36,9 +40,6 @@ export default defineNuxtConfig({
             cookieCrossOrigin: true
         }
     },
-    css: [
-        '~/assets/css/main.css'
-    ],
     app: {
         head: {
             title: 'nuxt-bag-web',
