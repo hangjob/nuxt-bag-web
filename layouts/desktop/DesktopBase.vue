@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div>布局</div>
+    <div class="min-h-screen bg-darker">
+        <BaseAppHeader></BaseAppHeader>
         <main>
             <slot/>
         </main>
