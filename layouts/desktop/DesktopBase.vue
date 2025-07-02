@@ -4,6 +4,7 @@
         <main>
             <slot/>
         </main>
+        <BaseAppFooter></BaseAppFooter>
     </div>
 </template>
 <script setup>
