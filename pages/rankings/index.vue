@@ -603,15 +603,6 @@
     font-weight: 500;
 }
 
-.tool-card {
-    transition: all 0.3s ease;
-}
-
-.tool-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.2);
-}
-
 .tab-button {
     padding: 0.5rem 1.5rem;
     border-radius: 0.75rem;

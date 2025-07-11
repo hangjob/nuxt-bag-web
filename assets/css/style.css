@@ -36,3 +36,14 @@ body {
 .nav-link:hover::after {
     width: 100%;
 }
+
+
+
+.tool-card {
+    transition: all 0.2s ease;
+}
+
+.tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.2), 0 4px 6px -4px rgba(99, 102, 241, 0.2);
+}

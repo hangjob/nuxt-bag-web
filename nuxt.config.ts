@@ -1,4 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+// @ts-ignore
 export default defineNuxtConfig({
     compatibilityDate: '2025-05-15',
     devtools: {enabled: true},
@@ -25,7 +26,11 @@ export default defineNuxtConfig({
         'pinia-plugin-persistedstate/nuxt',
         '@formkit/auto-animate/nuxt',
         '@nuxtjs/i18n',
+        '@nuxtjs/tailwindcss'
     ],
+    tailwindcss:{
+        configPath: '~/tailwind.config.js'
+    },
     i18n: {
         defaultLocale: 'zh',
         locales: [

@@ -34,57 +34,116 @@
                         <div class="glass-card rounded-2xl p-6">
                             <h2 class="text-xl font-bold text-white mb-4">筛选条件</h2>
 
-                            <!-- 技术栈筛选 -->
+                            <!-- 搜索筛选 -->
                             <div class="mb-6">
-                                <h3 class="font-semibold text-slate-300 mb-3">技术栈</h3>
-                                <div class="space-y-2">
-                                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
-                                        <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
-                                        <span class="ml-2 text-slate-300">JavaScript</span>
-                                    </label>
-                                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
-                                        <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
-                                        <span class="ml-2 text-slate-300">TypeScript</span>
-                                    </label>
-                                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
-                                        <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
-                                        <span class="ml-2 text-slate-300">Python</span>
-                                    </label>
-                                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
-                                        <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
-                                        <span class="ml-2 text-slate-300">Go</span>
-                                    </label>
-                                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
-                                        <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
-                                        <span class="ml-2 text-slate-300">Rust</span>
-                                    </label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-search text-slate-400"></i>
+                                    </div>
+                                    <input
+                                        type="text"
+                                        class="w-full bg-slate-800 border border-slate-700 rounded-lg py-2 pl-10 pr-4 text-slate-300 focus:outline-none focus:ring-1 focus:ring-primary"
+                                        placeholder="搜索筛选条件..."
+                                    >
                                 </div>
                             </div>
 
-                            <!-- 类别筛选 -->
-                            <div class="mb-6">
-                                <h3 class="font-semibold text-slate-300 mb-3">类别</h3>
-                                <div class="space-y-2">
-                                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
-                                        <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
-                                        <span class="ml-2 text-slate-300">前端框架</span>
-                                    </label>
-                                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
-                                        <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
-                                        <span class="ml-2 text-slate-300">后端框架</span>
-                                    </label>
-                                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
-                                        <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
-                                        <span class="ml-2 text-slate-300">数据库</span>
-                                    </label>
-                                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
-                                        <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
-                                        <span class="ml-2 text-slate-300">DevOps</span>
-                                    </label>
-                                    <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
-                                        <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
-                                        <span class="ml-2 text-slate-300">测试工具</span>
-                                    </label>
+                            <!-- 技术栈筛选 - 分组折叠 -->
+                            <div class="filter-group mb-6">
+                                <div class="accordion-header flex justify-between items-center mb-3">
+                                    <h3 class="font-semibold text-slate-300">技术栈</h3>
+                                    <i class="fas fa-chevron-down text-slate-400 accordion-icon"></i>
+                                </div>
+
+                                <div class="scroll-container">
+                                    <div class="grid grid-cols-2 gap-2 mb-2">
+                                        <div class="category-chip rounded-lg py-2 px-3 text-center text-sm text-slate-300 active">JavaScript</div>
+                                        <div class="category-chip rounded-lg py-2 px-3 text-center text-sm text-slate-300">TypeScript</div>
+                                        <div class="category-chip rounded-lg py-2 px-3 text-center text-sm text-slate-300">Python</div>
+                                        <div class="category-chip rounded-lg py-2 px-3 text-center text-sm text-slate-300">Go</div>
+                                        <div class="category-chip rounded-lg py-2 px-3 text-center text-sm text-slate-300">Rust</div>
+                                        <div class="category-chip rounded-lg py-2 px-3 text-center text-sm text-slate-300">Java</div>
+                                        <div class="category-chip rounded-lg py-2 px-3 text-center text-sm text-slate-300">C#</div>
+                                        <div class="category-chip rounded-lg py-2 px-3 text-center text-sm text-slate-300">PHP</div>
+                                        <div class="category-chip rounded-lg py-2 px-3 text-center text-sm text-slate-300">Ruby</div>
+                                        <div class="category-chip rounded-lg py-2 px-3 text-center text-sm text-slate-300">Swift</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 类别筛选 - 分组折叠 -->
+                            <div class="filter-group mb-6">
+                                <div class="accordion-header flex justify-between items-center mb-3">
+                                    <h3 class="font-semibold text-slate-300">类别</h3>
+                                    <i class="fas fa-chevron-down text-slate-400 accordion-icon"></i>
+                                </div>
+
+                                <div class="scroll-container">
+                                    <div class="space-y-2">
+                                        <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
+                                            <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
+                                            <span class="ml-2 text-slate-300">前端框架</span>
+                                        </label>
+                                        <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
+                                            <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
+                                            <span class="ml-2 text-slate-300">后端框架</span>
+                                        </label>
+                                        <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
+                                            <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
+                                            <span class="ml-2 text-slate-300">数据库</span>
+                                        </label>
+                                        <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
+                                            <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
+                                            <span class="ml-2 text-slate-300">DevOps</span>
+                                        </label>
+                                        <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
+                                            <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
+                                            <span class="ml-2 text-slate-300">测试工具</span>
+                                        </label>
+                                        <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
+                                            <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
+                                            <span class="ml-2 text-slate-300">部署工具</span>
+                                        </label>
+                                        <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
+                                            <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
+                                            <span class="ml-2 text-slate-300">API 工具</span>
+                                        </label>
+                                        <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
+                                            <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
+                                            <span class="ml-2 text-slate-300">监控工具</span>
+                                        </label>
+                                        <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
+                                            <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
+                                            <span class="ml-2 text-slate-300">安全工具</span>
+                                        </label>
+                                        <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
+                                            <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
+                                            <span class="ml-2 text-slate-300">AI/ML 工具</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 标签筛选 -->
+                            <div class="filter-group mb-6">
+                                <div class="accordion-header flex justify-between items-center mb-3">
+                                    <h3 class="font-semibold text-slate-300">热门标签</h3>
+                                    <i class="fas fa-chevron-down text-slate-400 accordion-icon"></i>
+                                </div>
+
+                                <div class="scroll-container">
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="tag px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">开源</span>
+                                        <span class="tag px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">免费</span>
+                                        <span class="tag px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">企业级</span>
+                                        <span class="tag px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">云原生</span>
+                                        <span class="tag px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">高性能</span>
+                                        <span class="tag px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">轻量级</span>
+                                        <span class="tag px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">跨平台</span>
+                                        <span class="tag px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">TypeScript</span>
+                                        <span class="tag px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">React</span>
+                                        <span class="tag px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">Vue</span>
+                                    </div>
                                 </div>
                             </div>
 
@@ -133,6 +192,7 @@
                             </div>
                         </div>
                     </div>
+
                     <!-- 工具卡片区域 -->
                     <div class="lg:col-span-3">
                         <!-- 搜索和过滤 -->
@@ -264,111 +324,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- 工具卡片 4 -->
-                            <div class="tool-card glass-card rounded-2xl p-5 flex flex-col">
-                                <div class="flex items-center mb-4">
-                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-purple-600 to-fuchsia-500 flex items-center justify-center mr-3">
-                                        <i class="fas fa-robot text-white text-xl"></i>
-                                    </div>
-                                    <div>
-                                        <h3 class="font-bold text-white">LangChain</h3>
-                                        <div class="flex items-center text-xs text-slate-400 mt-1">
-                                            <i class="fas fa-star text-yellow-400 mr-1"></i>
-                                            <span>4.6/5.0</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="text-sm text-slate-400 mb-4 flex-grow">用于开发由语言模型驱动的应用程序的框架。简化了构建AI应用的过程，支持多种语言模型。</p>
-                                <div class="flex flex-wrap gap-2 mb-4">
-                                    <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">AI</span>
-                                    <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">LLM</span>
-                                    <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">NLP</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <button class="nuxt-ui-btn px-3 py-1 rounded-lg bg-gradient-to-r from-purple-600 to-fuchsia-500 text-white text-sm hover:opacity-90">
-                                        详情
-                                    </button>
-                                    <div class="flex gap-2">
-                                        <button class="nuxt-ui-btn w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary" title="添加到收藏">
-                                            <i class="far fa-star text-slate-300"></i>
-                                        </button>
-                                        <button class="nuxt-ui-btn w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-green-500" title="复制链接">
-                                            <i class="fas fa-link text-slate-300"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 工具卡片 5 -->
-                            <div class="tool-card glass-card rounded-2xl p-5 flex flex-col">
-                                <div class="flex items-center mb-4">
-                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-amber-500 to-yellow-400 flex items-center justify-center mr-3">
-                                        <i class="fab fa-js text-white text-xl"></i>
-                                    </div>
-                                    <div>
-                                        <h3 class="font-bold text-white">TypeScript</h3>
-                                        <div class="flex items-center text-xs text-slate-400 mt-1">
-                                            <i class="fas fa-star text-yellow-400 mr-1"></i>
-                                            <span>4.9/5.0</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="text-sm text-slate-400 mb-4 flex-grow">JavaScript 的超集，添加了静态类型定义。增强了代码质量和可维护性，适合大型项目开发。</p>
-                                <div class="flex flex-wrap gap-2 mb-4">
-                                    <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">语言</span>
-                                    <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">类型安全</span>
-                                    <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">编译</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <button class="nuxt-ui-btn px-3 py-1 rounded-lg bg-gradient-to-r from-amber-500 to-yellow-400 text-white text-sm hover:opacity-90">
-                                        详情
-                                    </button>
-                                    <div class="flex gap-2">
-                                        <button class="nuxt-ui-btn w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary" title="添加到收藏">
-                                            <i class="fas fa-star text-yellow-400"></i>
-                                        </button>
-                                        <button class="nuxt-ui-btn w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-green-500" title="复制链接">
-                                            <i class="fas fa-link text-slate-300"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 工具卡片 6 -->
-                            <div class="tool-card glass-card rounded-2xl p-5 flex flex-col">
-                                <div class="flex items-center mb-4">
-                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-red-500 to-orange-400 flex items-center justify-center mr-3">
-                                        <i class="fas fa-fire text-white text-xl"></i>
-                                    </div>
-                                    <div>
-                                        <h3 class="font-bold text-white">Vite</h3>
-                                        <div class="flex items-center text-xs text-slate-400 mt-1">
-                                            <i class="fas fa-star text-yellow-400 mr-1"></i>
-                                            <span>4.8/5.0</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="text-sm text-slate-400 mb-4 flex-grow">下一代前端构建工具。极速的服务启动和热更新，支持多种框架，开发体验优秀。</p>
-                                <div class="flex flex-wrap gap-2 mb-4">
-                                    <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">构建工具</span>
-                                    <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">开发服务器</span>
-                                    <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">ESM</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <button class="nuxt-ui-btn px-3 py-1 rounded-lg bg-gradient-to-r from-red-500 to-orange-400 text-white text-sm hover:opacity-90">
-                                        详情
-                                    </button>
-                                    <div class="flex gap-2">
-                                        <button class="nuxt-ui-btn w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary" title="添加到收藏">
-                                            <i class="far fa-star text-slate-300"></i>
-                                        </button>
-                                        <button class="nuxt-ui-btn w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-green-500" title="复制链接">
-                                            <i class="fas fa-link text-slate-300"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                         <!-- Nuxt UI 分页 -->
@@ -409,3 +364,102 @@
         </div>
     </div>
 </template>
+<style lang="css">
+.nuxt-ui-btn {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.nuxt-ui-btn:after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(30deg);
+    transition: all 0.6s ease;
+}
+
+.nuxt-ui-btn:hover:after {
+    transform: rotate(30deg) translate(20%, 20%);
+}
+
+.scroll-container {
+    max-height: 250px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #4b5563 #1e293b;
+}
+
+.scroll-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.5);
+    border-radius: 3px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+    background-color: #4b5563;
+    border-radius: 3px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+    background-color: #64748b;
+}
+
+.filter-group {
+    transition: all 0.3s ease;
+}
+
+.tool-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.tag {
+    transition: all 0.2s ease;
+}
+
+.tag:hover {
+    background-color: #475569;
+    transform: translateY(-2px);
+}
+
+.accordion-header {
+    cursor: pointer;
+    user-select: none;
+}
+
+.accordion-icon {
+    transition: transform 0.3s ease;
+}
+
+.accordion-open .accordion-icon {
+    transform: rotate(180deg);
+}
+
+.category-chip {
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    transition: all 0.2s ease;
+}
+
+.category-chip:hover {
+    background: rgba(56, 70, 93, 0.7);
+    border-color: rgba(199, 210, 254, 0.5);
+}
+
+.category-chip.active {
+    background: rgba(139, 92, 246, 0.2);
+    border-color: rgba(167, 139, 250, 0.5);
+}
+</style>
