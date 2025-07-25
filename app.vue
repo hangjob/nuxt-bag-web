@@ -1,10 +1,11 @@
 <template>
-    <UApp>
+    <n-message-provider>
         <NuxtLayout name="desktop-base">
             <NuxtPage />
         </NuxtLayout>
-    </UApp>
+    </n-message-provider>
 </template>
 <script setup>
 
 </script>
+`

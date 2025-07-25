@@ -1,6 +1,10 @@
 <template>
-    <div class="flex">
-        <div class="flex-1 page-content">
+    <div class="flex flex-col">
+        <!-- 添加加载状态 -->
+        <div v-if="pending" class="flex justify-center items-center h-screen">
+            <p>加载中...</p>
+        </div>
+        <div v-else-if="frameworks" class="flex-1 page-content">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <!-- 顶部导航 -->
                 <div class="flex justify-between items-center mb-8">
@@ -11,7 +15,8 @@
                     <div class="flex items-center gap-4">
                         <!-- Nuxt UI 选择框 -->
                         <div class="relative">
-                            <select class="bg-slate-800 border border-slate-700 rounded-lg py-2 pl-4 pr-10 text-slate-300 appearance-none focus:ring-2 focus:ring-primary focus:outline-none">
+                            <select
+                                class="bg-slate-800 border border-slate-700 rounded-lg py-2 pl-4 pr-10 text-slate-300 appearance-none focus:ring-2 focus:ring-primary focus:outline-none">
                                 <option>按热度排序</option>
                                 <option>按更新时间</option>
                                 <option>按收藏数</option>
@@ -22,7 +27,8 @@
                         </div>
 
                         <!-- Nuxt UI 按钮 -->
-                        <button class="nuxt-ui-btn px-4 py-2 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-medium hover:opacity-90 flex items-center">
+                        <button
+                            class="nuxt-ui-btn px-4 py-2 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-medium hover:opacity-90 flex items-center">
                             <i class="fas fa-plus mr-2"></i>提交工具
                         </button>
                     </div>
@@ -57,16 +63,11 @@
 
                                 <div class="scroll-container">
                                     <div class="grid grid-cols-2 gap-2 mb-2">
-                                        <div class="category-chip rounded-lg py-2 px-3 text-center text-sm text-slate-300 active">JavaScript</div>
-                                        <div class="category-chip rounded-lg py-2 px-3 text-center text-sm text-slate-300">TypeScript</div>
-                                        <div class="category-chip rounded-lg py-2 px-3 text-center text-sm text-slate-300">Python</div>
-                                        <div class="category-chip rounded-lg py-2 px-3 text-center text-sm text-slate-300">Go</div>
-                                        <div class="category-chip rounded-lg py-2 px-3 text-center text-sm text-slate-300">Rust</div>
-                                        <div class="category-chip rounded-lg py-2 px-3 text-center text-sm text-slate-300">Java</div>
-                                        <div class="category-chip rounded-lg py-2 px-3 text-center text-sm text-slate-300">C#</div>
-                                        <div class="category-chip rounded-lg py-2 px-3 text-center text-sm text-slate-300">PHP</div>
-                                        <div class="category-chip rounded-lg py-2 px-3 text-center text-sm text-slate-300">Ruby</div>
-                                        <div class="category-chip rounded-lg py-2 px-3 text-center text-sm text-slate-300">Swift</div>
+                                        <div v-for="(item,idx) in stacks"
+                                             @click="handleStacks(item)"
+                                             :class="['category-chip rounded-lg py-2 px-3 text-center text-sm text-slate-300',compData.stacksIndex === idx ? 'active': null]">
+                                            {{ item.name }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -77,55 +78,23 @@
                                     <h3 class="font-semibold text-slate-300">类别</h3>
                                     <i class="fas fa-chevron-down text-slate-400 accordion-icon"></i>
                                 </div>
-
                                 <div class="scroll-container">
-                                    <div class="space-y-2">
-                                        <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
-                                            <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
-                                            <span class="ml-2 text-slate-300">前端框架</span>
-                                        </label>
-                                        <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
-                                            <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
-                                            <span class="ml-2 text-slate-300">后端框架</span>
-                                        </label>
-                                        <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
-                                            <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
-                                            <span class="ml-2 text-slate-300">数据库</span>
-                                        </label>
-                                        <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
-                                            <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
-                                            <span class="ml-2 text-slate-300">DevOps</span>
-                                        </label>
-                                        <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
-                                            <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
-                                            <span class="ml-2 text-slate-300">测试工具</span>
-                                        </label>
-                                        <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
-                                            <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
-                                            <span class="ml-2 text-slate-300">部署工具</span>
-                                        </label>
-                                        <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
-                                            <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
-                                            <span class="ml-2 text-slate-300">API 工具</span>
-                                        </label>
-                                        <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
-                                            <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
-                                            <span class="ml-2 text-slate-300">监控工具</span>
-                                        </label>
-                                        <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
-                                            <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
-                                            <span class="ml-2 text-slate-300">安全工具</span>
-                                        </label>
-                                        <label class="flex items-center cursor-pointer p-2 rounded-lg hover:bg-slate-800">
-                                            <input type="checkbox" class="form-checkbox rounded bg-slate-700 border-slate-600 text-primary focus:ring-primary">
-                                            <span class="ml-2 text-slate-300">AI/ML 工具</span>
-                                        </label>
+                                    <!-- 单个类别项 -->
+                                    <div @click="toggleCategory(item)"
+                                         :class="['category-item',compData.categoriesCheckboxValues.includes(item.documentId) ? 'selected' :null]"
+                                         v-for="item in categories">
+                                        <div class="category-checkbox">
+                                            <i :class="['fas fa-check text-xs text-white',compData.categoriesCheckboxValues.includes(item.documentId) ? null :'hidden']"></i>
+                                        </div>
+                                        <div class="flex-1 flex justify-between items-center">
+                                            <span class="font-medium">{{ item.name }}</span>
+                                            <span class="text-xs bg-slate-800/70 px-2 py-1 rounded-full">0</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
                             <!-- 标签筛选 -->
-                            <div class="filter-group mb-6">
+                            <div class="filter-group mb-6 hidden">
                                 <div class="accordion-header flex justify-between items-center mb-3">
                                     <h3 class="font-semibold text-slate-300">热门标签</h3>
                                     <i class="fas fa-chevron-down text-slate-400 accordion-icon"></i>
@@ -133,27 +102,22 @@
 
                                 <div class="scroll-container">
                                     <div class="flex flex-wrap gap-2">
-                                        <span class="tag px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">开源</span>
-                                        <span class="tag px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">免费</span>
-                                        <span class="tag px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">企业级</span>
-                                        <span class="tag px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">云原生</span>
-                                        <span class="tag px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">高性能</span>
-                                        <span class="tag px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">轻量级</span>
-                                        <span class="tag px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">跨平台</span>
-                                        <span class="tag px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">TypeScript</span>
-                                        <span class="tag px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">React</span>
-                                        <span class="tag px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">Vue</span>
+                                        <span
+                                            class="tag px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">开源</span>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Nuxt UI 应用筛选按钮 -->
-                            <button class="nuxt-ui-btn w-full py-2 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-medium hover:opacity-90">
+                            <button
+                                @click="commonRequest"
+                                class="nuxt-ui-btn cursor-pointer w-full py-2 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-medium hover:opacity-90">
                                 应用筛选
                             </button>
 
                             <!-- 重置按钮 -->
-                            <button class="nuxt-ui-btn w-full py-2 rounded-lg bg-slate-800 text-slate-300 mt-3 hover:bg-slate-700">
+                            <button
+                                class="nuxt-ui-btn w-full py-2 rounded-lg bg-slate-800 text-slate-300 mt-3 hover:bg-slate-700">
                                 重置筛选
                             </button>
                         </div>
@@ -162,33 +126,17 @@
                         <div class="glass-card rounded-2xl p-6 mt-6">
                             <h2 class="text-xl font-bold text-white mb-4">热门工具</h2>
                             <div class="space-y-4">
-                                <div class="flex items-center p-2 rounded-lg hover:bg-slate-800 cursor-pointer">
-                                    <div class="w-10 h-10 rounded-lg bg-violet-600 flex items-center justify-center mr-3">
-                                        <i class="fas fa-bolt text-white"></i>
+                                <nuxt-link :to="linkPrefix(item.documentId)" v-for="item in hotFrameworks"
+                                           class="flex items-center p-2 rounded-lg hover:bg-slate-800 cursor-pointer">
+                                    <div
+                                        :class="['w-10 flex-shrink-0 h-10 rounded-lg flex items-center justify-center mr-3',item.bg_color_class]">
+                                        <i :class="['text-white',item.icon]"></i>
                                     </div>
                                     <div>
-                                        <div class="font-semibold text-white">Vite</div>
-                                        <div class="text-sm text-slate-400">下一代前端工具</div>
+                                        <div class="font-semibold text-white">{{ item.name }}</div>
+                                        <div class="text-sm text-slate-400 line-clamp-1">{{ item.description }}</div>
                                     </div>
-                                </div>
-                                <div class="flex items-center p-2 rounded-lg hover:bg-slate-800 cursor-pointer">
-                                    <div class="w-10 h-10 rounded-lg bg-cyan-600 flex items-center justify-center mr-3">
-                                        <i class="fab fa-js text-white"></i>
-                                    </div>
-                                    <div>
-                                        <div class="font-semibold text-white">TypeScript</div>
-                                        <div class="text-sm text-slate-400">JavaScript的超集</div>
-                                    </div>
-                                </div>
-                                <div class="flex items-center p-2 rounded-lg hover:bg-slate-800 cursor-pointer">
-                                    <div class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center mr-3">
-                                        <i class="fas fa-database text-white"></i>
-                                    </div>
-                                    <div>
-                                        <div class="font-semibold text-white">Prisma</div>
-                                        <div class="text-sm text-slate-400">下一代ORM</div>
-                                    </div>
-                                </div>
+                                </nuxt-link>
                             </div>
                         </div>
                     </div>
@@ -208,11 +156,13 @@
                                 >
                             </div>
                             <div class="flex gap-2">
-                                <button class="nuxt-ui-btn px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 flex items-center">
+                                <button
+                                    class="nuxt-ui-btn px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 flex items-center">
                                     <i class="fas fa-filter mr-1"></i>
                                     <span>高级筛选</span>
                                 </button>
-                                <button class="nuxt-ui-btn px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 flex items-center">
+                                <button
+                                    class="nuxt-ui-btn px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 flex items-center">
                                     <i class="fas fa-sync-alt mr-1"></i>
                                 </button>
                             </div>
@@ -220,105 +170,45 @@
 
                         <!-- 工具卡片网格 -->
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <!-- 工具卡片 1 - 使用 Nuxt UI 样式 -->
-                            <div class="tool-card glass-card rounded-2xl p-5 flex flex-col">
+                            <div v-for="item in frameworks.data"
+                                 class="tool-card glass-card rounded-2xl p-5 flex flex-col">
                                 <div class="flex items-center mb-4">
-                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-violet-600 to-purple-500 flex items-center justify-center mr-3">
-                                        <i class="fab fa-vuejs text-white text-xl"></i>
+                                    <div
+                                        :class="['w-12 h-12 rounded-lg to-purple-500 flex items-center justify-center mr-3',item.bg_color_class]">
+                                        <i :class="['text-white',item.text_color_class,item.icon]"></i>
                                     </div>
                                     <div>
-                                        <h3 class="font-bold text-white">Vue.js</h3>
+                                        <h3 class="font-bold text-white">{{ item.name }}</h3>
                                         <div class="flex items-center text-xs text-slate-400 mt-1">
                                             <i class="fas fa-star text-yellow-400 mr-1"></i>
-                                            <span>4.9/5.0</span>
+                                            <span>{{ item.score }}/5.0</span>
                                         </div>
                                     </div>
                                 </div>
-                                <p class="text-sm text-slate-400 mb-4 flex-grow">渐进式 JavaScript 框架，用于构建用户界面。提供声明式渲染、组件系统、客户端路由等功能。</p>
+                                <p class="text-sm text-slate-400 mb-4 flex-grow line-clamp-3">{{ item.description }}</p>
                                 <div class="flex flex-wrap gap-2 mb-4">
-                                    <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">前端</span>
-                                    <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">框架</span>
-                                    <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">响应式</span>
+                                    <template v-for="(todo,idx) in item.tags">
+                                        <span v-if="idx<=2"
+                                              class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">{{
+                                                todo
+                                            }}</span>
+                                    </template>
                                 </div>
                                 <div class="flex justify-between items-center">
-                                    <button class="nuxt-ui-btn px-3 py-1 rounded-lg bg-gradient-to-r from-primary to-secondary text-white text-sm hover:opacity-90">
+                                    <nuxt-link :to="linkPrefix(item.documentId)"
+                                               :class="['nuxt-ui-btn px-3 py-1 rounded-lg text-white text-sm hover:opacity-90',item.bg_color_class]">
                                         详情
-                                    </button>
+                                    </nuxt-link>
                                     <div class="flex gap-2">
-                                        <button class="nuxt-ui-btn w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary" title="添加到收藏">
+                                        <button
+                                            class="nuxt-ui-btn w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary"
+                                            title="添加到收藏">
                                             <i class="far fa-star text-slate-300"></i>
                                         </button>
-                                        <button class="nuxt-ui-btn w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-green-500" title="复制链接">
-                                            <i class="fas fa-link text-slate-300"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 工具卡片 2 -->
-                            <div class="tool-card glass-card rounded-2xl p-5 flex flex-col">
-                                <div class="flex items-center mb-4">
-                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-500 flex items-center justify-center mr-3">
-                                        <i class="fab fa-react text-white text-xl"></i>
-                                    </div>
-                                    <div>
-                                        <h3 class="font-bold text-white">React</h3>
-                                        <div class="flex items-center text-xs text-slate-400 mt-1">
-                                            <i class="fas fa-star text-yellow-400 mr-1"></i>
-                                            <span>4.8/5.0</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="text-sm text-slate-400 mb-4 flex-grow">用于构建用户界面的 JavaScript 库。基于组件化开发，拥有强大的生态系统和社区支持。</p>
-                                <div class="flex flex-wrap gap-2 mb-4">
-                                    <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">前端</span>
-                                    <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">UI</span>
-                                    <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">组件</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <button class="nuxt-ui-btn px-3 py-1 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-500 text-white text-sm hover:opacity-90">
-                                        详情
-                                    </button>
-                                    <div class="flex gap-2">
-                                        <button class="nuxt-ui-btn w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary" title="添加到收藏">
-                                            <i class="fas fa-star text-yellow-400"></i>
-                                        </button>
-                                        <button class="nuxt-ui-btn w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-green-500" title="复制链接">
-                                            <i class="fas fa-link text-slate-300"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 工具卡片 3 -->
-                            <div class="tool-card glass-card rounded-2xl p-5 flex flex-col">
-                                <div class="flex items-center mb-4">
-                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-green-600 to-emerald-500 flex items-center justify-center mr-3">
-                                        <i class="fab fa-node-js text-white text-xl"></i>
-                                    </div>
-                                    <div>
-                                        <h3 class="font-bold text-white">Express.js</h3>
-                                        <div class="flex items-center text-xs text-slate-400 mt-1">
-                                            <i class="fas fa-star text-yellow-400 mr-1"></i>
-                                            <span>4.7/5.0</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="text-sm text-slate-400 mb-4 flex-grow">快速、开放、极简的 Node.js Web 框架。用于构建 API 和 Web 应用程序，拥有丰富的中间件生态系统。</p>
-                                <div class="flex flex-wrap gap-2 mb-4">
-                                    <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">后端</span>
-                                    <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">API</span>
-                                    <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">服务器</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <button class="nuxt-ui-btn px-3 py-1 rounded-lg bg-gradient-to-r from-green-600 to-emerald-500 text-white text-sm hover:opacity-90">
-                                        详情
-                                    </button>
-                                    <div class="flex gap-2">
-                                        <button class="nuxt-ui-btn w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary" title="添加到收藏">
-                                            <i class="far fa-star text-slate-300"></i>
-                                        </button>
-                                        <button class="nuxt-ui-btn w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-green-500" title="复制链接">
+                                        <button
+                                            @click="handleCopy(item.url)"
+                                            class="nuxt-ui-btn w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-green-500"
+                                            title="复制链接">
                                             <i class="fas fa-link text-slate-300"></i>
                                         </button>
                                     </div>
@@ -329,10 +219,11 @@
                         <!-- Nuxt UI 分页 -->
                         <div class="mt-8 flex justify-center">
                             <nav class="glass-card rounded-lg p-2 inline-flex">
-                                <a href="#" class="nuxt-ui-btn px-4 py-2 rounded-lg bg-gradient-to-r from-primary to-secondary text-white">1</a>
-                                <a href="#" class="nuxt-ui-btn px-4 py-2 rounded-lg text-slate-300 hover:bg-slate-800 mx-1">2</a>
-                                <a href="#" class="nuxt-ui-btn px-4 py-2 rounded-lg text-slate-300 hover:bg-slate-800 mx-1">3</a>
-                                <a href="#" class="nuxt-ui-btn px-4 py-2 rounded-lg text-slate-300 hover:bg-slate-800 mx-1">4</a>
+                                <a href="#"
+                                   v-for="item in frameworks.meta.pagination.page"
+                                   class="nuxt-ui-btn px-4 py-2 rounded-lg bg-gradient-to-r from-primary to-secondary text-white">{{
+                                        item
+                                    }}</a>
                                 <a href="#" class="nuxt-ui-btn px-4 py-2 rounded-lg text-slate-300 hover:bg-slate-800">下一页</a>
                             </nav>
                         </div>
@@ -364,6 +255,94 @@
         </div>
     </div>
 </template>
+<script setup>
+import {useClipboard} from '@vueuse/core'
+const message = useMessage()
+const {text, copy, copied, isSupported} = useClipboard()
+const compData = reactive({
+    stacksIndex: 0,
+    page: 0,
+    categoriesCheckboxValues: [],
+    stackDocumentId: ""
+})
+const {data: stacks} = useAsyncData('toolsStacks',
+    () => $fetch(`/api/stacks`, {
+        method: "GET",
+        query:
+            flattenObject({
+                pagination: {pageSize: 100}
+            })
+    }),
+    {transform: (res) => res.data || []}
+);
+const {data: categories} = useAsyncData('toolsCategories',
+    () => $fetch(`/api/categories`, {
+        method: "GET", query:
+            flattenObject({
+                pagination: {pageSize: 200}
+            })
+    }),
+    {transform: (res) => res.data || []}
+);
+
+const {data: frameworks, pending} = useAsyncData('toolsFrameworks',
+    () => $fetch(`/api/frameworks`, {
+        method: "GET", query: flattenObject({
+            pagination: {pageSize: 10},
+            populate: "*",
+            sort: {visit: 'desc'}
+        })
+    }),
+    {transform: (res) => res || []}
+)
+
+const {data: hotFrameworks} = useAsyncData('hotFrameworks',
+    () => $fetch(`/api/frameworks`, {
+        method: "GET", query: flattenObject({
+            pagination: {pageSize: 3},
+            populate: "*",
+            sort: {visit: 'desc'}
+        })
+    }),
+    {transform: (res) => res.data || []}
+)
+
+const commonRequest = () => {
+    $fetch(`/api/frameworks`, {
+        method: "GET", query: flattenObject({
+            pagination: {pageSize: 10},
+            populate: "*",
+            filters: {
+                stack: {documentId: compData.stackDocumentId},
+                categories: {documentId: {$in: compData.categoriesCheckboxValues}}
+            },
+            sort: {visit: 'desc'}
+        })
+    }).then((res) => {
+        frameworks.value = res;
+    })
+}
+const handleStacks = (item) => {
+    compData.stackDocumentId = item.documentId
+    commonRequest()
+}
+
+const toggleCategory = (item) => {
+    if (compData.categoriesCheckboxValues.includes(item.documentId)) {
+        compData.categoriesCheckboxValues = compData.categoriesCheckboxValues.filter(id => id !== item.documentId);
+    } else {
+        compData.categoriesCheckboxValues.push(item.documentId);
+    }
+};
+
+const handleCopy = (url) => {
+    copy(url).then(() => {
+        message.success('复制成功')
+    }).catch((err) => {
+        console.log(err)
+    })
+}
+</script>
 <style lang="css">
 .nuxt-ui-btn {
     transition: all 0.3s ease;

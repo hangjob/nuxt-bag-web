@@ -34,112 +34,112 @@
                     </div>
                     <div class="flex items-center">
                         <div class="relative mr-4">
-                            <UPopover>
-                                <button @click="compData.notificationPanelShow = true"
-                                        class="p-2 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 relative">
-                                    <i class="far fa-bell"></i>
-                                    <span
-                                        class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
-                                </button>
-                                <template #content>
-                                    <div
-                                        class="notification-panel absolute right-0 mt-2 w-80 bg-slate-800 rounded-lg shadow-lg border border-slate-700 z-50">
-                                        <div class="p-4 border-b border-slate-700 flex justify-between items-center">
-                                            <h3 class="font-semibold">通知</h3>
-                                            <button class="text-xs text-primary hover:text-secondary">全部已读</button>
-                                        </div>
-                                        <div class="max-h-80 overflow-y-auto">
-                                            <div class="notification-item p-4 border-b border-slate-700 cursor-pointer">
-                                                <div class="flex">
-                                                    <div class="flex-shrink-0">
-                                                        <div
-                                                            class="h-10 w-10 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center">
-                                                            <i class="fas fa-code-branch text-white text-sm"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="ml-3">
-                                                        <p class="text-sm font-medium">新的工作流模板已发布</p>
-                                                        <p class="text-sm text-slate-400 mt-1">
-                                                            查看最新的React开发工作流模板</p>
-                                                        <p class="text-xs text-slate-500 mt-1">2小时前</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="notification-item p-4 border-b border-slate-700 cursor-pointer">
-                                                <div class="flex">
-                                                    <div class="flex-shrink-0">
-                                                        <div
-                                                            class="h-10 w-10 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center">
-                                                            <i class="fas fa-tools text-white text-sm"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="ml-3">
-                                                        <p class="text-sm font-medium">工具库更新</p>
-                                                        <p class="text-sm text-slate-400 mt-1">新增5个AI代码助手工具</p>
-                                                        <p class="text-xs text-slate-500 mt-1">昨天</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="notification-item p-4 cursor-pointer">
-                                                <div class="flex">
-                                                    <div class="flex-shrink-0">
-                                                        <div
-                                                            class="h-10 w-10 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center">
-                                                            <i class="fas fa-trophy text-white text-sm"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="ml-3">
-                                                        <p class="text-sm font-medium">排行榜更新</p>
-                                                        <p class="text-sm text-slate-400 mt-1">
-                                                            你收藏的工具进入月度Top10</p>
-                                                        <p class="text-xs text-slate-500 mt-1">3天前</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="p-3 text-center border-t border-slate-700">
-                                            <a href="#"
-                                               class="text-sm text-primary hover:text-secondary">查看所有通知</a>
-                                        </div>
-                                    </div>
-                                </template>
-                            </UPopover>
+<!--                            <UPopover>-->
+<!--                                <button @click="compData.notificationPanelShow = true"-->
+<!--                                        class="p-2 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 relative">-->
+<!--                                    <i class="far fa-bell"></i>-->
+<!--                                    <span-->
+<!--                                        class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>-->
+<!--                                </button>-->
+<!--                                <template #content>-->
+<!--                                    <div-->
+<!--                                        class="notification-panel absolute right-0 mt-2 w-80 bg-slate-800 rounded-lg shadow-lg border border-slate-700 z-50">-->
+<!--                                        <div class="p-4 border-b border-slate-700 flex justify-between items-center">-->
+<!--                                            <h3 class="font-semibold">通知</h3>-->
+<!--                                            <button class="text-xs text-primary hover:text-secondary">全部已读</button>-->
+<!--                                        </div>-->
+<!--                                        <div class="max-h-80 overflow-y-auto">-->
+<!--                                            <div class="notification-item p-4 border-b border-slate-700 cursor-pointer">-->
+<!--                                                <div class="flex">-->
+<!--                                                    <div class="flex-shrink-0">-->
+<!--                                                        <div-->
+<!--                                                            class="h-10 w-10 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center">-->
+<!--                                                            <i class="fas fa-code-branch text-white text-sm"></i>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="ml-3">-->
+<!--                                                        <p class="text-sm font-medium">新的工作流模板已发布</p>-->
+<!--                                                        <p class="text-sm text-slate-400 mt-1">-->
+<!--                                                            查看最新的React开发工作流模板</p>-->
+<!--                                                        <p class="text-xs text-slate-500 mt-1">2小时前</p>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="notification-item p-4 border-b border-slate-700 cursor-pointer">-->
+<!--                                                <div class="flex">-->
+<!--                                                    <div class="flex-shrink-0">-->
+<!--                                                        <div-->
+<!--                                                            class="h-10 w-10 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center">-->
+<!--                                                            <i class="fas fa-tools text-white text-sm"></i>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="ml-3">-->
+<!--                                                        <p class="text-sm font-medium">工具库更新</p>-->
+<!--                                                        <p class="text-sm text-slate-400 mt-1">新增5个AI代码助手工具</p>-->
+<!--                                                        <p class="text-xs text-slate-500 mt-1">昨天</p>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="notification-item p-4 cursor-pointer">-->
+<!--                                                <div class="flex">-->
+<!--                                                    <div class="flex-shrink-0">-->
+<!--                                                        <div-->
+<!--                                                            class="h-10 w-10 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center">-->
+<!--                                                            <i class="fas fa-trophy text-white text-sm"></i>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="ml-3">-->
+<!--                                                        <p class="text-sm font-medium">排行榜更新</p>-->
+<!--                                                        <p class="text-sm text-slate-400 mt-1">-->
+<!--                                                            你收藏的工具进入月度Top10</p>-->
+<!--                                                        <p class="text-xs text-slate-500 mt-1">3天前</p>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="p-3 text-center border-t border-slate-700">-->
+<!--                                            <a href="#"-->
+<!--                                               class="text-sm text-primary hover:text-secondary">查看所有通知</a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </template>-->
+<!--                            </UPopover>-->
                         </div>
                         <div class="relative">
-                            <UPopover>
-                                <button @click="compData.profilePanelShow = true"
-                                        class="p-2 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700">
-                                    <i class="far fa-user"></i>
-                                </button>
-                                <template #content>
-                                    <div
-                                        class="profile-panel absolute right-0 mt-2 w-64 bg-slate-800 rounded-lg shadow-lg border border-slate-700 z-50">
-                                        <div class="p-4 flex items-center border-b border-slate-700">
-                                            <div
-                                                class="h-10 w-10 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center">
-                                                <i class="fas fa-user text-white"></i>
-                                            </div>
-                                            <div class="ml-3">
-                                                <p class="font-medium">开发者用户</p>
-                                                <p class="text-sm text-slate-400">pro@devhub.com</p>
-                                            </div>
-                                        </div>
-                                        <div class="py-1">
-                                            <a href="#" class="block px-4 py-2 text-sm hover:bg-slate-700">个人中心</a>
-                                            <a href="#"
-                                               class="block px-4 py-2 text-sm hover:bg-slate-700">我的工具集</a>
-                                            <a href="#"
-                                               class="block px-4 py-2 text-sm hover:bg-slate-700">我的工作流</a>
-                                            <a href="#" class="block px-4 py-2 text-sm hover:bg-slate-700">收藏夹</a>
-                                        </div>
-                                        <div class="py-1 border-t border-slate-700">
-                                            <a href="#" class="block px-4 py-2 text-sm hover:bg-slate-700">设置</a>
-                                            <a href="#"
-                                               class="block px-4 py-2 text-sm hover:bg-slate-700 text-red-400 hover:text-red-300">退出登录</a>
-                                        </div>
-                                    </div>
-                                </template>
-                            </UPopover>
+<!--                            <UPopover>-->
+<!--                                <button @click="compData.profilePanelShow = true"-->
+<!--                                        class="p-2 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700">-->
+<!--                                    <i class="far fa-user"></i>-->
+<!--                                </button>-->
+<!--                                <template #content>-->
+<!--                                    <div-->
+<!--                                        class="profile-panel absolute right-0 mt-2 w-64 bg-slate-800 rounded-lg shadow-lg border border-slate-700 z-50">-->
+<!--                                        <div class="p-4 flex items-center border-b border-slate-700">-->
+<!--                                            <div-->
+<!--                                                class="h-10 w-10 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center">-->
+<!--                                                <i class="fas fa-user text-white"></i>-->
+<!--                                            </div>-->
+<!--                                            <div class="ml-3">-->
+<!--                                                <p class="font-medium">开发者用户</p>-->
+<!--                                                <p class="text-sm text-slate-400">pro@devhub.com</p>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="py-1">-->
+<!--                                            <a href="#" class="block px-4 py-2 text-sm hover:bg-slate-700">个人中心</a>-->
+<!--                                            <a href="#"-->
+<!--                                               class="block px-4 py-2 text-sm hover:bg-slate-700">我的工具集</a>-->
+<!--                                            <a href="#"-->
+<!--                                               class="block px-4 py-2 text-sm hover:bg-slate-700">我的工作流</a>-->
+<!--                                            <a href="#" class="block px-4 py-2 text-sm hover:bg-slate-700">收藏夹</a>-->
+<!--                                        </div>-->
+<!--                                        <div class="py-1 border-t border-slate-700">-->
+<!--                                            <a href="#" class="block px-4 py-2 text-sm hover:bg-slate-700">设置</a>-->
+<!--                                            <a href="#"-->
+<!--                                               class="block px-4 py-2 text-sm hover:bg-slate-700 text-red-400 hover:text-red-300">退出登录</a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </template>-->
+<!--                            </UPopover>-->
                         </div>
                     </div>
                 </div>

@@ -111,10 +111,11 @@
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-12">
                     <div class="category-tile glass-card rounded-xl overflow-hidden" v-for="item in categories">
                         <div class="p-5">
-                            <div :class="['w-12 h-12 rounded-lg flex items-center justify-center mb-3',item.bg_color_class]">
+                            <div
+                                :class="['w-12 h-12 rounded-lg flex items-center justify-center mb-3',item.bg_color_class]">
                                 <i :class="['text-xl',item.icon,item.text_color_class]"></i>
                             </div>
-                            <h3 class="font-semibold text-white mb-1">{{item.name}}</h3>
+                            <h3 class="font-semibold text-white mb-1">{{ item.name }}</h3>
                             <p class="text-sm text-slate-400">126 个工具</p>
                         </div>
                     </div>
@@ -124,7 +125,7 @@
                     <div class="flex justify-between items-center mb-6">
                         <h2 class="text-2xl font-bold text-white">开发者热搜榜</h2>
                         <div class="flex items-center">
-                            <div class="text-sm text-slate-400 mr-4">更新于: 2023-11-15</div>
+                            <div class="text-sm text-slate-400 mr-4">更新于: {{dayjs().subtract(5, 'hour').subtract(40, 'minute').format('YYYY-MM-DD HH:mm')}}</div>
                             <button
                                 class="px-3 py-1 bg-slate-800 rounded-lg text-sm text-slate-300 hover:bg-slate-700 flex items-center">
                                 <i class="fas fa-sync-alt mr-1 text-xs"></i>
@@ -133,29 +134,34 @@
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <!-- 热搜项 1 -->
-                        <div class="trending-item glass-card rounded-xl p-4 transition-all">
+                        <div v-for="(item,idx) in hotFrameworks"
+                             class="trending-item glass-card rounded-xl p-4 transition-all">
                             <div class="flex items-start">
                                 <div
-                                    class="w-10 h-10 rounded-lg bg-gradient-to-r from-amber-500 to-yellow-300 flex items-center justify-center text-white font-bold mr-4">
-                                    1
+                                    :class="['w-10 h-10 rounded-lg to-yellow-300 flex items-center justify-center text-white font-bold mr-4',item.bg_color_class]">
+                                    {{ idx + 1 }}
                                 </div>
                                 <div class="flex-1">
                                     <div class="flex items-center justify-between">
                                         <div>
-                                            <div class="font-semibold text-white">Vite</div>
-                                            <div class="text-sm text-slate-400">下一代前端工具</div>
+                                            <div class="font-semibold text-white">{{ item.name }}</div>
+                                            <div class="text-sm pl-1 text-slate-400 line-clamp-1">
+                                                {{ item.description }}
+                                            </div>
                                         </div>
                                         <div
-                                            class="w-10 h-10 rounded-lg bg-violet-600 flex items-center justify-center">
-                                            <i class="fas fa-bolt text-white"></i>
+                                            :class="['w-10 h-10 flex-shrink-0 rounded-lg flex items-center justify-center',item.bg_color_class]">
+                                            <i :class="['text-white',item.icon]"></i>
                                         </div>
                                     </div>
                                     <div class="flex items-center mt-4">
-                                        <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300 mr-3">构建工具</span>
+                                        <span v-for="todo in item.categories"
+                                              class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300 mr-3">{{
+                                                todo.name
+                                            }}</span>
                                         <div class="flex items-center text-green-500 text-sm">
                                             <i class="fas fa-arrow-up mr-1"></i>
-                                            <span>12%</span>
+                                            <span>{{ item.attributes.changeValue }}%</span>
                                         </div>
                                     </div>
                                     <div class="flex justify-between items-center mt-4">
@@ -164,106 +170,22 @@
                                                 <div class="heat-pulse bg-orange-500"></div>
                                                 <i class="fas fa-fire text-orange-400 text-sm"></i>
                                             </div>
-                                            <span class="text-white font-medium text-sm">7.2K</span>
+                                            <span
+                                                class="text-white font-medium text-sm">{{
+                                                    item.attributes.heatValue
+                                                }}</span>
                                             <span class="text-slate-500 ml-1 text-sm">热度</span>
                                         </div>
                                         <div class="flex gap-2">
                                             <button
-                                                class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-indigo-600">
+                                                class="w-8 cursor-pointer h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-indigo-600">
                                                 <i class="far fa-star text-slate-300"></i>
                                             </button>
-                                            <button
-                                                class="px-3 py-1 rounded-lg bg-slate-800 text-xs text-slate-300 hover:bg-indigo-600">
+                                            <nuxt-link
+                                                :to="linkPrefix(item.documentId)"
+                                                class="px-3 cursor-pointer flex items-center justify-center py-1 rounded-lg bg-slate-800 text-xs text-slate-300 hover:bg-indigo-600">
                                                 详情
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 热搜项 2 -->
-                        <div class="trending-item glass-card rounded-xl p-4 transition-all">
-                            <div class="flex items-start">
-                                <div
-                                    class="w-10 h-10 rounded-lg bg-gradient-to-r from-slate-600 to-slate-400 flex items-center justify-center text-white font-bold mr-4">
-                                    2
-                                </div>
-                                <div class="flex-1">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <div class="font-semibold text-white">TypeScript</div>
-                                            <div class="text-sm text-slate-400">JavaScript的超集</div>
-                                        </div>
-                                        <div class="w-10 h-10 rounded-lg bg-cyan-600 flex items-center justify-center">
-                                            <i class="fab fa-js text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center mt-4">
-                                        <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300 mr-3">编程语言</span>
-                                        <div class="flex items-center text-green-500 text-sm">
-                                            <i class="fas fa-arrow-up mr-1"></i>
-                                            <span>5%</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex justify-between items-center mt-4">
-                                        <div class="text-sm text-slate-400">
-                                            <i class="fas fa-fire text-orange-400 mr-1"></i>
-                                            <span>8.7k 热度</span>
-                                        </div>
-                                        <div class="flex gap-2">
-                                            <button
-                                                class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-indigo-600">
-                                                <i class="fas fa-star text-yellow-400"></i>
-                                            </button>
-                                            <button
-                                                class="px-3 py-1 rounded-lg bg-slate-800 text-xs text-slate-300 hover:bg-indigo-600">
-                                                详情
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 热搜项 3 -->
-                        <div class="trending-item glass-card rounded-xl p-4 transition-all">
-                            <div class="flex items-start">
-                                <div
-                                    class="w-10 h-10 rounded-lg bg-gradient-to-r from-amber-700 to-amber-500 flex items-center justify-center text-white font-bold mr-4">
-                                    3
-                                </div>
-                                <div class="flex-1">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <div class="font-semibold text-white">Prisma</div>
-                                            <div class="text-sm text-slate-400">下一代ORM</div>
-                                        </div>
-                                        <div class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center">
-                                            <i class="fas fa-database text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center mt-4">
-                                        <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300 mr-3">数据库</span>
-                                        <div class="flex items-center text-green-500 text-sm">
-                                            <i class="fas fa-arrow-up mr-1"></i>
-                                            <span>18%</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex justify-between items-center mt-4">
-                                        <div class="text-sm text-slate-400">
-                                            <i class="fas fa-fire text-orange-400 mr-1"></i>
-                                            <span>7.2k 热度</span>
-                                        </div>
-                                        <div class="flex gap-2">
-                                            <button
-                                                class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-indigo-600">
-                                                <i class="far fa-star text-slate-300"></i>
-                                            </button>
-                                            <button
-                                                class="px-3 py-1 rounded-lg bg-slate-800 text-xs text-slate-300 hover:bg-indigo-600">
-                                                详情
-                                            </button>
+                                            </nuxt-link>
                                         </div>
                                     </div>
                                 </div>
@@ -271,306 +193,177 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- 精选开发工具 -->
                 <div class="mb-12">
                     <div class="flex justify-between items-center mb-6">
                         <h2 class="text-2xl font-bold text-white">精选开发工具</h2>
                         <div class="flex flex-wrap gap-2">
-                            <button
-                                class="px-3 py-1 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
-                                前端框架
-                            </button>
-                            <button class="px-3 py-1 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">
-                                构建工具
-                            </button>
-                            <button class="px-3 py-1 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">
-                                后端框架
-                            </button>
-                            <button class="px-3 py-1 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">
-                                AI工具
+                            <button @click="handleHandpickFrameworks(item,idx)" v-for="(item,idx) in handpickCategories"
+                                    :class="['px-3 cursor-pointer py-1 rounded-lg text-white',compData.handpickCategoriesIndex === idx ? item.bg_color_class : null,`hover:bg-violet-600`]">
+                                {{ item.name }}
+                                <span :class="`hover:${item.bg_color_class}`"></span>
                             </button>
                         </div>
                     </div>
-
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         <!-- 工具卡片 1 -->
-                        <div class="tool-card glass-card rounded-xl p-5">
+                        <div v-for="item in handpickFrameworks" class="tool-card glass-card rounded-xl p-5">
                             <div class="flex items-center mb-4">
                                 <div
-                                    class="w-12 h-12 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 flex items-center justify-center mr-3">
-                                    <i class="fab fa-vuejs text-white text-xl"></i>
+                                    :class="['w-12 h-12 rounded-lg from-indigo-600 flex items-center justify-center mr-3',item.bg_color_class]">
+                                    <i :class="['text-white text-xl',item.icon,item.text_color_class,]"></i>
                                 </div>
                                 <div>
-                                    <h3 class="font-bold text-white">Vue.js</h3>
+                                    <h3 class="font-bold text-white">{{ item.name }}</h3>
                                     <div class="flex items-center text-xs text-slate-400 mt-1">
-                                        <div class="flex mr-2">
-                                            <i class="fas fa-star text-yellow-400"></i>
-                                            <i class="fas fa-star text-yellow-400"></i>
-                                            <i class="fas fa-star text-yellow-400"></i>
-                                            <i class="fas fa-star text-yellow-400"></i>
-                                            <i class="fas fa-star-half-alt text-yellow-400"></i>
-                                        </div>
-                                        <span>4.8</span>
+                                        <businessStarRating :score="item.score"></businessStarRating>
+                                        <span>{{ item.score }}</span>
                                     </div>
                                 </div>
                             </div>
-                            <p class="text-sm text-slate-400 mb-4">渐进式 JavaScript 框架，用于构建用户界面</p>
+                            <p class="text-sm text-slate-400 mb-4 line-clamp-2">{{ item.description }}</p>
                             <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">前端</span>
-                                <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">框架</span>
-                                <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">响应式</span>
+                                <span v-for="todo in item.alternatives"
+                                      class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">{{
+                                        todo
+                                    }}</span>
                             </div>
                             <div class="flex justify-between items-center">
-                                <button
-                                    class="px-3 py-1 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm hover:opacity-90">
+                                <nuxt-link :to="linkPrefix(item.documentId)"
+                                    :class="['px-3 py-1 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-sm hover:opacity-90']">
                                     详情
-                                </button>
+                                </nuxt-link>
                                 <button
                                     class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-indigo-600">
                                     <i class="far fa-star text-slate-300"></i>
                                 </button>
                             </div>
                         </div>
-
-                        <!-- 工具卡片 2 -->
-                        <div class="tool-card glass-card rounded-xl p-5">
-                            <div class="flex items-center mb-4">
-                                <div
-                                    class="w-12 h-12 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-500 flex items-center justify-center mr-3">
-                                    <i class="fab fa-react text-white text-xl"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-white">React</h3>
-                                    <div class="flex items-center text-xs text-slate-400 mt-1">
-                                        <div class="flex mr-2">
-                                            <i class="fas fa-star text-yellow-400"></i>
-                                            <i class="fas fa-star text-yellow-400"></i>
-                                            <i class="fas fa-star text-yellow-400"></i>
-                                            <i class="fas fa-star text-yellow-400"></i>
-                                            <i class="far fa-star text-slate-600"></i>
-                                        </div>
-                                        <span>4.7</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-sm text-slate-400 mb-4">用于构建用户界面的 JavaScript 库</p>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">前端</span>
-                                <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">UI</span>
-                                <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">组件</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <button
-                                    class="px-3 py-1 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-500 text-white text-sm hover:opacity-90">
-                                    详情
-                                </button>
-                                <button
-                                    class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-600">
-                                    <i class="fas fa-star text-yellow-400"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- 工具卡片 3 -->
-                        <div class="tool-card glass-card rounded-xl p-5">
-                            <div class="flex items-center mb-4">
-                                <div
-                                    class="w-12 h-12 rounded-lg bg-gradient-to-r from-green-600 to-emerald-500 flex items-center justify-center mr-3">
-                                    <i class="fab fa-node-js text-white text-xl"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-white">Express.js</h3>
-                                    <div class="flex items-center text-xs text-slate-400 mt-1">
-                                        <div class="flex mr-2">
-                                            <i class="fas fa-star text-yellow-400"></i>
-                                            <i class="fas fa-star text-yellow-400"></i>
-                                            <i class="fas fa-star text-yellow-400"></i>
-                                            <i class="fas fa-star text-yellow-400"></i>
-                                            <i class="fas fa-star-half-alt text-yellow-400"></i>
-                                        </div>
-                                        <span>4.7</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-sm text-slate-400 mb-4">快速、开放、极简的 Node.js Web 框架</p>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">后端</span>
-                                <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">API</span>
-                                <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">服务器</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <button
-                                    class="px-3 py-1 rounded-lg bg-gradient-to-r from-green-600 to-emerald-500 text-white text-sm hover:opacity-90">
-                                    详情
-                                </button>
-                                <button
-                                    class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-green-600">
-                                    <i class="far fa-star text-slate-300"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- 工具卡片 4 -->
-                        <div class="tool-card glass-card rounded-xl p-5">
-                            <div class="flex items-center mb-4">
-                                <div
-                                    class="w-12 h-12 rounded-lg bg-gradient-to-r from-purple-600 to-fuchsia-500 flex items-center justify-center mr-3">
-                                    <i class="fas fa-robot text-white text-xl"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-white">LangChain</h3>
-                                    <div class="flex items-center text-xs text-slate-400 mt-1">
-                                        <div class="flex mr-2">
-                                            <i class="fas fa-star text-yellow-400"></i>
-                                            <i class="fas fa-star text-yellow-400"></i>
-                                            <i class="fas fa-star text-yellow-400"></i>
-                                            <i class="fas fa-star text-yellow-400"></i>
-                                            <i class="far fa-star text-slate-600"></i>
-                                        </div>
-                                        <span>4.6</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-sm text-slate-400 mb-4">用于开发由语言模型驱动的应用程序的框架</p>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">AI</span>
-                                <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">LLM</span>
-                                <span class="px-2 py-1 rounded-full bg-slate-800 text-xs text-slate-300">NLP</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <button
-                                    class="px-3 py-1 rounded-lg bg-gradient-to-r from-purple-600 to-fuchsia-500 text-white text-sm hover:opacity-90">
-                                    详情
-                                </button>
-                                <button
-                                    class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-purple-600">
-                                    <i class="far fa-star text-slate-300"></i>
-                                </button>
-                            </div>
-                        </div>
                     </div>
                 </div>
-
                 <!-- 工具详情模态框（静态展示） -->
-                <div class="glass-card rounded-2xl p-8 mb-12">
-                    <div class="flex justify-between items-start mb-6">
-                        <div class="flex items-start">
-                            <div class="w-16 h-16 rounded-lg flex items-center justify-center mr-4 bg-purple-500/20">
-                                <i class="fas fa-bolt text-2xl text-purple-400"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-2xl font-bold text-white">Vite</h3>
-                                <div class="flex items-center mt-2">
-                                    <div class="flex mr-2">
-                                        <i class="fas fa-star text-yellow-400"></i>
-                                        <i class="fas fa-star text-yellow-400"></i>
-                                        <i class="fas fa-star text-yellow-400"></i>
-                                        <i class="fas fa-star text-yellow-400"></i>
-                                        <i class="fas fa-star-half-alt text-yellow-400"></i>
+                <div style="min-height: 550px" class="relative overflow-hidden">
+                    <transition
+                        enter-active-class="transition-all duration-500 ease-out"
+                        leave-active-class="transition-all duration-500 ease-in absolute top-0 left-0 w-full"
+                        enter-from-class="opacity-0 translate-x-full"
+                        leave-to-class="opacity-0 -translate-x-full"
+                        mode="out-in"
+                    >
+                        <div class="glass-card rounded-2xl p-8 mb-12" v-if="hotFrameworks?.length > 0"
+                             :key="compData.currentToolIndex">
+                            <div class="flex justify-between items-start mb-6">
+                                <div class="flex items-start">
+                                    <div
+                                        class="w-16 h-16 rounded-lg flex items-center justify-center mr-4 bg-purple-500/20">
+                                        <i class="fas fa-bolt text-2xl text-purple-400"></i>
                                     </div>
-                                    <span class="text-slate-400">4.9</span>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="text-slate-400 hover:text-white">
-                            <i class="fas fa-times text-xl"></i>
-                        </button>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <!-- 左侧信息 -->
-                        <div>
-                            <p class="text-slate-300 mb-6">
-                                下一代前端工具，基于ESM原生导入。提供秒级启动、热更新和插件生态，优化现代Web开发体验。</p>
-
-                            <div class="mb-6">
-                                <h4 class="text-slate-400 mb-2">分类</h4>
-                                <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300">
-                                    构建工具
-                                </span>
-                            </div>
-
-                            <div class="mb-6">
-                                <h4 class="text-slate-400 mb-2">标签</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300">ESM</span>
-                                    <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300">秒级启动</span>
-                                    <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300">热更新</span>
-                                    <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300">插件生态</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-6">
-                                <h4 class="text-slate-400 mb-2">学习曲线</h4>
-                                <div class="flex items-center">
-                                    <span class="text-slate-300 mr-3">简单</span>
-                                    <div class="flex">
-                                        <i class="fas fa-star text-yellow-400"></i>
-                                        <i class="fas fa-star text-yellow-400"></i>
-                                        <i class="far fa-star text-slate-600"></i>
-                                        <i class="far fa-star text-slate-600"></i>
-                                        <i class="far fa-star text-slate-600"></i>
+                                    <div>
+                                        <h3 class="text-2xl font-bold text-white">{{ currentTool.name }}</h3>
+                                        <div class="flex items-center mt-2">
+                                            <businessStarRating :score="currentTool.score"></businessStarRating>
+                                            <span class="text-slate-400">{{ currentTool.score }}</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div>
-                                <h4 class="text-slate-400 mb-2">替代方案</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300">Webpack</span>
-                                    <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300">Snowpack</span>
-                                    <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300">WMR</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 右侧链接 -->
-                        <div>
-                            <div class="link-section space-y-3">
-                                <a href="https://vitejs.dev" target="_blank" class="link-item">
-                                    <i class="fas fa-globe"></i>
-                                    <span>官方网站</span>
-                                    <i class="fas fa-external-link-alt ml-2 text-xs"></i>
-                                </a>
-
-                                <a href="https://cn.vitejs.dev/" target="_blank" class="link-item">
-                                    <i class="fas fa-globe-asia"></i>
-                                    <span>中文网站</span>
-                                    <i class="fas fa-external-link-alt ml-2 text-xs"></i>
-                                </a>
-
-                                <a href="https://github.com/vitejs/vite" target="_blank" class="link-item">
-                                    <i class="fab fa-github"></i>
-                                    <span>GitHub 仓库</span>
-                                    <i class="fas fa-external-link-alt ml-2 text-xs"></i>
-                                </a>
-
-                                <a href="https://www.npmjs.com/package/vite" target="_blank" class="link-item">
-                                    <i class="fab fa-npm"></i>
-                                    <span>npm 包</span>
-                                    <i class="fas fa-external-link-alt ml-2 text-xs"></i>
-                                </a>
-
-                                <a href="https://cn.vitejs.dev/guide/" target="_blank" class="link-item">
-                                    <i class="fas fa-graduation-cap"></i>
-                                    <span>教程文档</span>
-                                    <i class="fas fa-external-link-alt ml-2 text-xs"></i>
-                                </a>
-                            </div>
-
-                            <div class="mt-8">
-                                <h4 class="text-slate-400 mb-2">添加到收藏</h4>
-                                <button
-                                    class="px-4 py-2 rounded-lg flex items-center bg-slate-800 text-slate-300 hover:bg-slate-700">
-                                    <i class="far fa-star"></i>
-                                    <span class="ml-2">收藏此工具</span>
+                                <button @click="nextTool" class="text-slate-400 hover:text-white">
+                                    <i class="fas fa-times text-xl"></i>
                                 </button>
                             </div>
-                        </div>
-                    </div>
-                </div>
 
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <!-- 左侧信息 -->
+                                <div>
+                                    <p class="text-slate-300 mb-6 line-clamp-3">{{ currentTool.description }}</p>
+                                    <div class="mb-6">
+                                        <h4 class="text-slate-400 mb-2">分类</h4>
+                                        <span v-for="todo in currentTool.categories"
+                                              class="px-3 py-1 rounded-full bg-slate-800 text-slate-300">
+                                            {{ todo.name }}
+                                        </span>
+                                    </div>
+
+                                    <div class="mb-6">
+                                        <h4 class="text-slate-400 mb-2">标签</h4>
+                                        <div class="flex flex-wrap gap-2">
+                                        <span v-for="todo in currentTool.tags"
+                                              class="px-3 py-1 rounded-full bg-slate-800 text-slate-300">{{
+                                                todo
+                                            }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-6">
+                                        <h4 class="text-slate-400 mb-2">学习曲线</h4>
+                                        <div class="flex items-center">
+                                            <span class="text-slate-300 mr-3">简单</span>
+                                            <div class="flex">
+                                                <i class="fas fa-star text-yellow-400"></i>
+                                                <i class="fas fa-star text-yellow-400"></i>
+                                                <i class="far fa-star text-slate-600"></i>
+                                                <i class="far fa-star text-slate-600"></i>
+                                                <i class="far fa-star text-slate-600"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <h4 class="text-slate-400 mb-2">替代方案</h4>
+                                        <div class="flex flex-wrap gap-2">
+                                        <span v-for="todo in currentTool.alternatives"
+                                              class="px-3 py-1 rounded-full bg-slate-800 text-slate-300">{{
+                                                todo
+                                            }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 右侧链接 -->
+                                <div>
+                                    <div class="link-section space-y-3">
+                                        <a :href="currentTool.url" target="_blank" class="link-item">
+                                            <i class="fas fa-globe"></i>
+                                            <span>官方网站</span>
+                                            <i class="fas fa-external-link-alt ml-2 text-xs"></i>
+                                        </a>
+
+                                        <a :href="currentTool.zh_url" target="_blank" class="link-item">
+                                            <i class="fas fa-globe-asia"></i>
+                                            <span>中文网站</span>
+                                            <i class="fas fa-external-link-alt ml-2 text-xs"></i>
+                                        </a>
+
+                                        <a :href="currentTool.github" target="_blank" class="link-item">
+                                            <i class="fab fa-github"></i>
+                                            <span>GitHub 仓库</span>
+                                            <i class="fas fa-external-link-alt ml-2 text-xs"></i>
+                                        </a>
+
+                                        <a :href="currentTool.npm" target="_blank" class="link-item">
+                                            <i class="fab fa-npm"></i>
+                                            <span>npm 包</span>
+                                            <i class="fas fa-external-link-alt ml-2 text-xs"></i>
+                                        </a>
+
+                                        <a :href="currentTool.tutorial" target="_blank" class="link-item">
+                                            <i class="fas fa-graduation-cap"></i>
+                                            <span>教程文档</span>
+                                            <i class="fas fa-external-link-alt ml-2 text-xs"></i>
+                                        </a>
+                                    </div>
+
+                                    <div class="mt-8">
+                                        <h4 class="text-slate-400 mb-2">添加到收藏</h4>
+                                        <button
+                                            class="px-4 py-2 rounded-lg flex items-center bg-slate-800 text-slate-300 hover:bg-slate-700">
+                                            <i class="far fa-star"></i>
+                                            <span class="ml -2">收藏此工具</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </transition>
+                </div>
                 <!-- 数据统计展示 -->
                 <div class="glass-card rounded-2xl p-6 mt-12">
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -593,27 +386,85 @@
                     </div>
                 </div>
             </div>
-            <UButton @click="handleExpert">Button</UButton>
         </div>
     </div>
 </template>
 <script setup>
 import {useWebsiteStore} from "~/stores/website.js";
 import arrs from "~/assets/deepseek_json_20250703_42fdb1.js"
-import qs from "qs"
+const dayjs = useDayjs();
+const compData = reactive({
+    isAnimating: false,
+    currentToolIndex: 0,
+    handpickCategoriesIndex: 0
+})
 
 const website = useWebsiteStore()
-const {data: categories} = useAsyncData('pm-categories',
+const {data: categories} = useAsyncData('categories',
     () => $fetch(`/api/categories`, {method: "GET", query: flattenObject({pagination: {pageSize: 5}, populate: "*"})}),
-    {
-        transform: (res) => {
-            return res.data || []
-        }
-    }
+    {transform: (res) => res.data || []}
 );
-console.log(categories)
-let count = 0;
 
+const {data: handpickCategories} = useAsyncData('handpickCategories',
+    () => $fetch(`/api/categories`, {
+        method: "GET", query: flattenObject({
+            pagination: {pageSize: 5}, populate: "*",
+            filters: {handpick: {$eq: 1}}
+        })
+    }),
+    {transform: (res) => res.data || []}
+);
+
+const {data: hotFrameworks} = useAsyncData('hotFrameworks',
+    () => $fetch(`/api/frameworks`, {
+        method: "GET", query: flattenObject({
+            pagination: {pageSize: 3},
+            populate: "*",
+            sort: {visit: 'desc'}
+        })
+    }),
+    {transform: (res) => res.data || []}
+)
+
+const {data: handpickFrameworks} = useAsyncData('handpickFrameworks',
+    () => $fetch(`/api/frameworks`, {
+        method: "GET", query: flattenObject({
+            pagination: {pageSize: 8},
+            populate: "*",
+            filters: {handpick: {$eq: 1,}},
+            sort: {visit: 'desc'}
+        })
+    }),
+    {transform: (res) => res.data || []}
+)
+
+const handleHandpickFrameworks = (item, idx) => {
+    $fetch(`/api/frameworks`, {
+        method: "GET", query: flattenObject({
+            pagination: {pageSize: 4}, populate: "*",
+            filters: {handpick: {$eq: 1}, categories: {documentId: item.documentId}},
+            sort: {visit: 'desc'}
+        })
+    }).then((res) => {
+        compData.handpickCategoriesIndex = idx;
+        handpickFrameworks.value = res.data;
+    })
+}
+
+// 计算当前显示的工具
+const currentTool = computed(() => {
+    return hotFrameworks.value[compData.currentToolIndex] || {};
+});
+
+const nextTool = () => {
+    compData.isAnimating = true;
+    compData.currentToolIndex = (compData.currentToolIndex + 1) % hotFrameworks.value.length;
+    setTimeout(() => {
+        compData.isAnimating = false;
+    }, 120);
+};
+
+let count = 0;
 const handleExpert = () => {
     const {category, ...data} = arrs[count]
     fetch(`/api/docs`, {
@@ -631,7 +482,7 @@ const handleExpert = () => {
             handleExpert()
         }, 200)
     }).catch((err) => {
-        console.log(err)
+        // console.log(err)
         count++;
         if (count > arrs.length) {
             return
@@ -644,6 +495,13 @@ const handleExpert = () => {
 </script>
 
 <style lang="css" scoped>
+/* 确保容器有相对定位 */
+.tool-container {
+    position: relative;
+    min-height: 546px; /* 防止高度跳动 */
+    overflow: hidden;
+}
+
 .gradient-border {
     position: relative;
     border-radius: 16px;

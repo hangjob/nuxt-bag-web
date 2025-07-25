@@ -350,64 +350,170 @@
                         <!-- 上升最快卡片 -->
                         <div class="glass-card rounded-2xl p-6">
                             <div class="flex items-center justify-between mb-6">
-                                <h2 class="text-xl font-bold text-white">上升最快</h2>
-                                <span class="text-sm text-green-500 flex items-center">
-                            <i class="fas fa-arrow-up mr-1"></i>
-                            本周
-                        </span>
+                                <div class="flex items-center">
+                                    <i class="fas fa-rocket text-amber-400 text-xl mr-3 animate-float"></i>
+                                    <h2 class="text-xl font-bold text-white">上升最快</h2>
+                                </div>
+                                <span class="text-sm text-green-500 flex items-center bg-green-900/30 px-3 py-1 rounded-full">
+                                    <i class="fas fa-arrow-up mr-1"></i>
+                                    本周飙升榜
+                                </span>
                             </div>
 
                             <div class="space-y-5">
-                                <div class="highlight-card glass-card rounded-xl p-4 border-l-green-500">
-                                    <div class="flex items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-lg bg-gradient-to-r from-green-500 to-emerald-400 flex items-center justify-center text-white font-bold mr-4">
+                                <!-- 上升最快卡片1 -->
+                                <div class="group relative overflow-hidden glass-card rounded-xl p-5 border-l-4 border-green-500 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                                    <div class="flex items-start">
+                                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-green-500 to-emerald-400 flex items-center justify-center text-white font-bold text-xl mr-4 shadow-lg">
                                             +3
                                         </div>
-                                        <div>
-                                            <div class="font-semibold text-white">Prisma</div>
-                                            <div class="text-sm text-slate-400">数据库ORM工具</div>
+                                        <div class="flex-1">
+                                            <div class="flex items-center justify-between">
+                                                <div>
+                                                    <div class="font-bold text-white text-lg flex items-center">
+                                                        Prisma
+                                                        <span class="trend-badge bg-green-500 text-white ml-2">热门</span>
+                                                    </div>
+                                                    <div class="text-sm text-slate-400 mt-1">数据库ORM工具</div>
+                                                </div>
+                                                <div class="flex items-center text-amber-500">
+                                                    <i class="fas fa-star text-sm"></i>
+                                                    <span class="ml-1 font-medium">4.7</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="mt-4 flex items-center justify-between">
+                                                <div class="flex items-center">
+                                                    <div class="text-green-500 font-bold text-lg flex items-center">
+                                                        <i class="fas fa-arrow-up mr-1"></i>
+                                                        <span>18%</span>
+                                                    </div>
+                                                    <span class="text-sm text-slate-400 ml-2">热度增长</span>
+                                                </div>
+
+                                                <!-- 趋势图 -->
+                                                <div class="trend-sparkline">
+                                                    <svg viewBox="0 0 100 30" class="w-20">
+                                                        <path d="M0,25 L20,15 L40,10 L60,5 L80,15 L100,20"
+                                                              class="trend-chart-path stroke-green-500"
+                                                              stroke-dasharray="120"
+                                                              stroke-dashoffset="120">
+                                                            <animate attributeName="stroke-dashoffset" from="120" to="0" dur="1.5s" fill="freeze" />
+                                                        </path>
+                                                    </svg>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="mt-3 flex items-center text-green-500">
-                                        <i class="fas fa-arrow-up mr-1"></i>
-                                        <span>18% 热度增长</span>
+                                    <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <i class="fas fa-external-link-alt text-slate-400 hover:text-primary"></i>
                                     </div>
                                 </div>
 
-                                <div class="highlight-card glass-card rounded-xl p-4 border-l-purple-500">
-                                    <div class="flex items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-lg bg-gradient-to-r from-purple-500 to-fuchsia-400 flex items-center justify-center text-white font-bold mr-4">
+                                <!-- 上升最快卡片2 -->
+                                <div class="group relative overflow-hidden glass-card rounded-xl p-5 border-l-4 border-purple-500 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                                    <div class="flex items-start">
+                                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-fuchsia-400 flex items-center justify-center text-white font-bold text-xl mr-4 shadow-lg">
                                             +5
                                         </div>
-                                        <div>
-                                            <div class="font-semibold text-white">SvelteKit</div>
-                                            <div class="text-sm text-slate-400">前端框架</div>
+                                        <div class="flex-1">
+                                            <div class="flex items-center justify-between">
+                                                <div>
+                                                    <div class="font-bold text-white text-lg flex items-center">
+                                                        SvelteKit
+                                                        <span class="trend-badge bg-purple-500 text-white ml-2">新锐</span>
+                                                    </div>
+                                                    <div class="text-sm text-slate-400 mt-1">前端框架</div>
+                                                </div>
+                                                <div class="flex items-center text-amber-500">
+                                                    <i class="fas fa-star text-sm"></i>
+                                                    <span class="ml-1 font-medium">4.6</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="mt-4 flex items-center justify-between">
+                                                <div class="flex items-center">
+                                                    <div class="text-green-500 font-bold text-lg flex items-center">
+                                                        <i class="fas fa-arrow-up mr-1"></i>
+                                                        <span>12%</span>
+                                                    </div>
+                                                    <span class="text-sm text-slate-400 ml-2">热度增长</span>
+                                                </div>
+
+                                                <!-- 趋势图 -->
+                                                <div class="trend-sparkline">
+                                                    <svg viewBox="0 0 100 30" class="w-20">
+                                                        <path d="M0,25 L20,20 L40,15 L60,10 L80,5 L100,10"
+                                                              class="trend-chart-path stroke-purple-500"
+                                                              stroke-dasharray="120"
+                                                              stroke-dashoffset="120">
+                                                            <animate attributeName="stroke-dashoffset" from="120" to="0" dur="1.5s" fill="freeze" />
+                                                        </path>
+                                                    </svg>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="mt-3 flex items-center text-green-500">
-                                        <i class="fas fa-arrow-up mr-1"></i>
-                                        <span>12% 热度增长</span>
+                                    <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <i class="fas fa-external-link-alt text-slate-400 hover:text-primary"></i>
                                     </div>
                                 </div>
 
-                                <div class="highlight-card glass-card rounded-xl p-4 border-l-blue-500">
-                                    <div class="flex items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-lg bg-gradient-to-r from-blue-500 to-sky-400 flex items-center justify-center text-white font-bold mr-4">
+                                <!-- 上升最快卡片3 -->
+                                <div class="group relative overflow-hidden glass-card rounded-xl p-5 border-l-4 border-blue-500 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                                    <div class="flex items-start">
+                                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-sky-400 flex items-center justify-center text-white font-bold text-xl mr-4 shadow-lg">
                                             +8
                                         </div>
-                                        <div>
-                                            <div class="font-semibold text-white">Turbo</div>
-                                            <div class="text-sm text-slate-400">构建系统</div>
+                                        <div class="flex-1">
+                                            <div class="flex items-center justify-between">
+                                                <div>
+                                                    <div class="font-bold text-white text-lg flex items-center">
+                                                        Turbo
+                                                        <span class="trend-badge bg-blue-500 text-white ml-2">突破</span>
+                                                    </div>
+                                                    <div class="text-sm text-slate-400 mt-1">构建系统</div>
+                                                </div>
+                                                <div class="flex items-center text-amber-500">
+                                                    <i class="fas fa-star text-sm"></i>
+                                                    <span class="ml-1 font-medium">4.5</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="mt-4 flex items-center justify-between">
+                                                <div class="flex items-center">
+                                                    <div class="text-green-500 font-bold text-lg flex items-center">
+                                                        <i class="fas fa-arrow-up mr-1"></i>
+                                                        <span>22%</span>
+                                                    </div>
+                                                    <span class="text-sm text-slate-400 ml-2">热度增长</span>
+                                                </div>
+
+                                                <!-- 趋势图 -->
+                                                <div class="trend-sparkline">
+                                                    <svg viewBox="0 0 100 30" class="w-20">
+                                                        <path d="M0,25 L20,18 L40,12 L60,8 L80,4 L100,10"
+                                                              class="trend-chart-path stroke-blue-500"
+                                                              stroke-dasharray="120"
+                                                              stroke-dashoffset="120">
+                                                            <animate attributeName="stroke-dashoffset" from="120" to="0" dur="1.5s" fill="freeze" />
+                                                        </path>
+                                                    </svg>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="mt-3 flex items-center text-green-500">
-                                        <i class="fas fa-arrow-up mr-1"></i>
-                                        <span>22% 热度增长</span>
+                                    <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <i class="fas fa-external-link-alt text-slate-400 hover:text-primary"></i>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="mt-6 pt-4 border-t border-slate-700/50">
+                                <button class="w-full py-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium flex items-center justify-center transition-colors">
+                                    <i class="fas fa-chart-line mr-2"></i>
+                                    查看所有上升工具
+                                </button>
                             </div>
                         </div>
 
@@ -565,25 +671,7 @@
     </div>
 </template>
 <script setup>
-// tailwind.config = {
-//     theme: {
-//         extend: {
-//             colors: {
-//                 primary: '#8b5cf6',
-//                 secondary: '#6366f1',
-//                 slate: {
-//                     800: '#1e293b',
-//                     700: '#334155',
-//                     600: '#475569',
-//                     500: '#64748b',
-//                     400: '#94a3b8',
-//                     300: '#cbd5e1',
-//                     200: '#e2e8f0',
-//                 }
-//             }
-//         }
-//     }
-// }
+
 </script>
 <style lang="css" scoped>
 .rank-badge {

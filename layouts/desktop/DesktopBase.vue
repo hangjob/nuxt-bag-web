@@ -1,6 +1,6 @@
 <template>
     <div class="min-h-screen bg-darker">
-        <BaseAppHeader></BaseAppHeader>
+<!--        <BaseAppHeader></BaseAppHeader>-->
         <main>
             <slot/>
         </main>

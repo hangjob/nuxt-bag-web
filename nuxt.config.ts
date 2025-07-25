@@ -1,19 +1,26 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 // @ts-ignore
+// @ts-ignore
+
+import AutoImport from 'unplugin-auto-import/vite'
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
+import Components from 'unplugin-vue-components/vite'
+
+console.log(Components)
 export default defineNuxtConfig({
     compatibilityDate: '2025-05-15',
-    devtools: {enabled: true},
+    devtools: {enabled: false},
     css: [
         '~/assets/css/main.css',
-        '~/assets/css/style.css'
+        '~/assets/css/style.css',
+        '~/assets/css/tailwind.css',
     ],
     modules: [
         '@nuxt/fonts',
         '@nuxt/icon',
         '@nuxt/image',
         '@nuxt/scripts',
-        '@nuxt/test-utils',
-        '@nuxt/ui',
+        // '@nuxt/ui',
         '@nuxtjs/sitemap',
         [
             '@pinia/nuxt',
@@ -25,26 +32,48 @@ export default defineNuxtConfig({
         ],
         'pinia-plugin-persistedstate/nuxt',
         '@formkit/auto-animate/nuxt',
-        '@nuxtjs/i18n',
-        '@nuxtjs/tailwindcss'
+        // '@nuxtjs/i18n',
+        '@nuxtjs/tailwindcss',
+        '@vueuse/nuxt',
+        'nuxtjs-naive-ui'
     ],
-    tailwindcss:{
-        configPath: '~/tailwind.config.js'
+    vite: {
+        plugins: [
+            AutoImport({
+                imports: [
+                    {
+                        'naive-ui': [
+                            'useDialog',
+                            'useMessage',
+                            'useNotification',
+                            'useLoadingBar'
+                        ]
+                    }
+                ]
+            }),
+            Components({
+                resolvers: [NaiveUiResolver()]
+            })
+        ]
     },
-    i18n: {
-        defaultLocale: 'zh',
-        locales: [
-            {code: 'en', name: 'English', file: 'en.json'},
-            {code: 'zh', name: 'Chinese', file: 'zh.json'}
-        ],
-        detectBrowserLanguage: {
-            useCookie: true,
-            cookieKey: 'i18n_redirected',
-            redirectOn: 'root',
-            alwaysRedirect: true, // 每次访问保存
-            cookieCrossOrigin: true
-        }
-    },
+    // i18n: {
+    //     defaultLocale: 'zh',
+    //     locales: [
+    //         {code: 'en', name: 'English', file: 'en.json'},
+    //         {code: 'zh', name: 'Chinese', file: 'zh.json'}
+    //     ],
+    //     detectBrowserLanguage: {
+    //         useCookie: true,
+    //         cookieKey: 'i18n_redirected',
+    //         redirectOn: 'root',
+    //         alwaysRedirect: true, // 每次访问保存
+    //         cookieCrossOrigin: true
+    //     },
+    //     // 添加以下配置关闭有问题的功能
+    //     bundle: {
+    //         optimizeTranslationDirective: false // 明确禁用该功能
+    //     }
+    // },
     app: {
         head: {
             title: 'nuxt-bag-web',

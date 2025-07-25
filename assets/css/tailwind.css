@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+    .glass-card {
+        @apply bg-slate-800/40 backdrop-blur-lg border border-slate-700/30;
+    }
+
+    .nuxt-ui-btn {
+        @apply transition-all duration-300 relative overflow-hidden;
+    }
+
+    .nuxt-ui-btn:hover {
+        @apply opacity-90;
+    }
+
+    .category-chip {
+        @apply bg-slate-800/70 border border-slate-700 rounded-lg py-2 px-3 text-center text-sm text-slate-300 transition-all duration-200 cursor-pointer;
+    }
+
+    .category-chip:hover {
+        @apply bg-slate-700 border-primary/50;
+    }
+
+    .category-chip.active {
+        @apply bg-primary/20 border-primary/60;
+    }
+
+    .filter-group {
+        @apply transition-all duration-300;
+    }
+
+    .tool-card {
+        @apply transition-transform duration-300 ease-in-out;
+    }
+
+    .tool-card:hover {
+        @apply -translate-y-1 shadow-xl;
+    }
+
+    .scroll-container {
+        @apply max-h-60 overflow-y-auto pr-2;
+        scrollbar-width: thin;
+        scrollbar-color: #475569 #1e293b;
+    }
+
+    .scroll-container::-webkit-scrollbar {
+        @apply w-1.5;
+    }
+
+    .scroll-container::-webkit-scrollbar-track {
+        @apply bg-slate-800/30 rounded;
+    }
+
+    .scroll-container::-webkit-scrollbar-thumb {
+        @apply bg-slate-600 rounded;
+    }
+
+    .scroll-container::-webkit-scrollbar-thumb:hover {
+        @apply bg-slate-500;
+    }
+
+    .accordion-icon {
+        @apply transition-transform duration-300;
+    }
+
+    .accordion-open .accordion-icon {
+        @apply rotate-180;
+    }
+
+    .category-item {
+        @apply flex items-center p-3 rounded-xl mb-2 transition-all duration-200 bg-slate-800/30 hover:bg-slate-700/50 cursor-pointer;
+    }
+
+    .category-item.selected {
+        @apply bg-primary/10 border border-primary/30;
+    }
+
+    .category-checkbox {
+        @apply w-5 h-5 rounded flex items-center justify-center border border-slate-600 mr-3 transition-colors duration-200;
+    }
+
+    .category-item.selected .category-checkbox {
+        @apply bg-primary border-primary;
+    }
+
+    .animate-pulse {
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+
+
+    .rank-badge {
+        @apply w-9 h-9 flex items-center justify-center rounded-full font-bold;
+    }
+
+    .trend-badge {
+        @apply px-2 py-1 rounded-full text-xs font-medium flex items-center;
+    }
+
+    .ranking-change {
+        @apply w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ml-2;
+    }
+
+    .trend-chart {
+        height: 36px;
+        width: 100%;
+        position: relative;
+    }
+
+    .trend-chart-line {
+        @apply absolute bottom-0 w-full;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .trend-chart-path {
+        @apply absolute bottom-0;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+    }
+
+    .trend-sparkline {
+        width: 100px;
+        height: 30px;
+    }
+}
